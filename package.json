@@ -1,0 +1,22 @@
+{
+  "name": "swagger-codegen-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "glob": "^7.1.6",
+    "handlebars": "^4.7.2",
+    "swagger-parser": "^8.0.4",
+    "ts-node": "^8.6.1",
+    "typescript": "^3.7.4"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.1",
+    "@types/node": "^13.1.6"
+  }
+}

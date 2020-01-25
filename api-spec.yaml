@@ -1,0 +1,123 @@
+openapi: "3.0.2"
+info:
+  title: TypeScript Codegen Test
+  version: "1.0.0"
+  description: TypeScript Codegen Test
+paths:
+  /api/posts:
+    get:
+      tags: [Post]
+      operationId: IndexPosts
+      summary: index posts
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  posts:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Post'
+    post:
+      tags: [Post]
+      operationId: CreatePosts
+      summary: create a new post
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  post:
+                    $ref: '#/components/schemas/Post'
+  /api/posts/{id}:
+    parameters:
+      - $ref: '#/components/parameters/id'
+    get:
+      tags: [Post]
+      operationId: GetPost
+      summary: get a post
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  post:
+                    $ref: '#/components/schemas/Post'
+    put:
+      tags: [Post]
+      operationId: UpdatePost
+      summary: update a post
+      responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  post:
+                    $ref: '#/components/schemas/Post'
+    delete:
+      tags: [Post]
+      operationId: DeletePost
+      summary: delete a post
+      responses:
+        204:
+          $ref: '#/components/responses/204'
+components:
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+  responses:
+    204:
+      description: NoContent
+  schemas:
+    ResourceId:
+      type: number
+    DateTimeString:
+      type: string
+      format: datetime
+    MarkdownString:
+      type: string
+      description: Markdown Text
+    MarkdownStringNullable:
+      allOf:
+        - $ref: '#/components/schemas/MarkdownString'
+        - nullable: true
+    User:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/ResourceId'
+        displayName:
+          type: string
+        gender:
+          type: string
+          enum: [male, female]
+          nullable: true
+    Post:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/ResourceId'
+        author:
+          $ref: '#/components/schemas/User'
+        postedAt:
+          $ref: '#/components/schemas/DateTimeString'
+        published:
+          type: boolean
+        content:
+          $ref: '#/components/schemas/MarkdownStringNullable'

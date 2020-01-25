@@ -1,0 +1,8 @@
+class DateString extends String {}
+class DateTimeString extends String {}
+
+{{#each aliases}}
+
+type {{name}} = {{typeName.name}}
+
+{{#each}}
